@@ -1,5 +1,5 @@
 //Constant for max pokemon retrieved from API 
-const MAX_POKEMON = 151;
+const MAX_POKEMON = 493;
 const listWrapper = document.querySelector(".list-wrapper");
 
 //Search and filters
@@ -32,19 +32,19 @@ function displayPokemon(pokemon) {
             <p class="caption-fonts">#${pokemonID}</p>
         </div>
         <div class="img-wrap">
-            <img src="https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" 
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" 
             alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
             <p> #${pokemon.name}</p>
         </div>
         `
-        listItem.addEventListener("click", async () => {
-           const success = await redirectToPokemon(pokemonID);
-           if(success){
-                window.location.href =  `./entry.html?id=${pokemonID}`;
-           } 
-        });
+        // listItem.addEventListener("click", async () => {
+        //    const success = await redirectToPokemon(pokemonID);
+        //    if(success){
+        //         window.location.href =  `./entry.html?id=${pokemonID}`;
+        //    } 
+        // });
         //Append list item to listWrapper
         listWrapper.appendChild(listItem);
     })
