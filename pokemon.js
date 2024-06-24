@@ -1,5 +1,5 @@
 //Constant for max pokemon retrieved from API 
-const MAX_POKEMON = 493;
+const MAX_POKEMON = 151;
 const listWrapper = document.querySelector(".list-wrapper");
 
 //Search and filters
@@ -15,14 +15,16 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
 .then((data) =>{
     //Save all 493 pokemon to pokemon_data
     pokemon_data = data.results;
+    displayPokemon(pokemon_data);
 })
 
 
 function displayPokemon(pokemon) {
+    //Clear inner HTML to avoid duplicates on page
     listWrapper.innerHTML= ""; 
 
     pokemon.forEach((pokemon) => {
-        const pokemonID = pokemon.url.split("/")[-2];
+        const pokemonID = pokemon.url.split("/")[6];
         const listItem = document.createElement('div');
         listItem.className = 'list-item';
         listItem.innerHTML = `
@@ -30,8 +32,8 @@ function displayPokemon(pokemon) {
             <p class="caption-fonts">#${pokemonID}</p>
         </div>
         <div class="img-wrap">
-            <img src="https://github.com/PokeAPI/sprites/pokemon/other/official-artwork/
-            ${pokemonID}.png" alt="${pokemon.name}" />
+            <img src="https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" 
+            alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
             <p> #${pokemon.name}</p>
@@ -42,7 +44,9 @@ function displayPokemon(pokemon) {
            if(success){
                 window.location.href =  `./entry.html?id=${pokemonID}`;
            } 
-        })
+        });
+        //Append list item to listWrapper
+        listWrapper.appendChild(listItem);
     })
 }
 async function redirectToPokemon(id){
