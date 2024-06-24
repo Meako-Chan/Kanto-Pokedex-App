@@ -25,7 +25,6 @@ function displayPokemon(pokemon) {
 
     pokemon.forEach((pokemon) => {
         const pokemonID = pokemon.url.split("/")[6];
-        console.log(pokemon.name)
         const listItem = document.createElement('div');
         listItem.className = 'list-item';
         listItem.innerHTML = `
@@ -92,3 +91,11 @@ function handleSearch(){
     }
 }
 
+const closeButton = document.querySelector(".search-close-icon");
+closeButton.addEventListener("click", clearSearch);
+
+function clearSearch(){
+    searchInput.value = "";  
+    displayPokemon(pokemon_data);
+    notFoundMessage.style.display = 'none';
+} 
