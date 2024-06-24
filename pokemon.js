@@ -25,6 +25,7 @@ function displayPokemon(pokemon) {
 
     pokemon.forEach((pokemon) => {
         const pokemonID = pokemon.url.split("/")[6];
+        console.log(pokemon.name)
         const listItem = document.createElement('div');
         listItem.className = 'list-item';
         listItem.innerHTML = `
@@ -39,12 +40,12 @@ function displayPokemon(pokemon) {
             <p> #${pokemon.name}</p>
         </div>
         `
-        // listItem.addEventListener("click", async () => {
-        //    const success = await redirectToPokemon(pokemonID);
-        //    if(success){
-        //         window.location.href =  `./entry.html?id=${pokemonID}`;
-        //    } 
-        // });
+        listItem.addEventListener("click", async () => {
+           const success = await redirectToPokemon(pokemonID);
+           if(success){
+                window.location.href =  `./entry.html?id=${pokemonID}`;
+           } 
+        });
         //Append list item to listWrapper
         listWrapper.appendChild(listItem);
     })
@@ -62,6 +63,32 @@ async function redirectToPokemon(id){
     return true;
     }catch (error){
         console.error("Failed to redirect to Pokemon!");
+    }
+}
+
+searchInput.addEventListener("keyup", handleSearch);
+
+function handleSearch(){
+    const searchValue = searchInput.value.toLowerCase();
+    let filteredPokemon;
+
+    if(numberFilter.checked) {
+        filteredPokemon = pokemon_data.filter((pokemon) =>{
+            const pokemonID = pokemon.url.split("/")[6];
+            return pokemonID.startsWith(searchValue)
+        });
+    } else if(nameFilter.checked) {
+        filteredPokemon = pokemon_data.filter((pokemon) =>
+            pokemon.name.toLowerCase().startsWith(searchValue)
+        );
+    }else{
+        filteredPokemon = pokemon_data;
+    }
+    displayPokemon(filteredPokemon);
+    if(filteredPokemon.length === 0){
+        notFoundMessage.style.display = "block";
+    }else{
+        notFoundMessage.style.display = "none";
     }
 }
 
