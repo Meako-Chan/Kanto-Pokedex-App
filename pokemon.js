@@ -36,7 +36,7 @@ function displayPokemon(pokemon) {
             alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
-            <p> #${pokemon.name}</p>
+            <p> ${pokemon.name}</p>
         </div>
         `
         listItem.addEventListener("click", async () => {
