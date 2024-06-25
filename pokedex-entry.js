@@ -1,7 +1,7 @@
 let currentPokemonId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const MAX_POKEMONS = 151;
+  const MAX_POKEMONS = 493;
   const pokemonID = new URLSearchParams(window.location.search).get("id");
   const id = parseInt(pokemonID, 10);
 
@@ -46,7 +46,7 @@ async function loadPokemon(id) {
           navigatePokemon(id - 1);
         });
       }
-      if (id !== 151) {
+      if (id !== 493) {
         rightArrow.addEventListener("click", () => {
           navigatePokemon(id + 1);
         });
@@ -85,7 +85,6 @@ const typeColors = {
   dragon: "#7038F8",
   dark: "#705848",
   steel: "#B8B8D0",
-  dark: "#EE99AC",
 };
 
 function setElementStyles(elements, cssProperty, value) {
@@ -212,8 +211,8 @@ function displayPokemonDetails(pokemon) {
     hp: "HP",
     attack: "ATK",
     defense: "DEF",
-    "special-attack": "SATK",
-    "special-defense": "SDEF",
+    "special-attack": "SP.ATK",
+    "special-defense": "SP.DEF",
     speed: "SPD",
   };
 
