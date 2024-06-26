@@ -53,7 +53,7 @@ async function loadPokemon(id) {
           });
         }
   
-        window.history.pushState({}, "", `./detail.html?id=${id}`);
+        window.history.pushState({}, "", `./entry.html?id=${id}`);
       }
   
       return true;
